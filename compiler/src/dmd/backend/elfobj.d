@@ -68,7 +68,7 @@ else
     enum DMDV2 = false;
 bool REQUIRE_DSO_REGISTRY()
 {
-    return DMDV2 && (config.exe & (EX_LINUX | EX_LINUX64 | EX_FREEBSD | EX_FREEBSD64 | EX_DRAGONFLYBSD64));
+    return DMDV2 && (config.exe & (EX_LINUX | EX_LINUX64 | EX_FREEBSD | EX_FREEBSD64 | EX_DRAGONFLYBSD64 | EX_ANONYMOS64));
 }
 
 /**
@@ -1243,6 +1243,7 @@ void ElfObj_term(const(char)[] objfilename)
         case EX_SOLARIS:
         case EX_SOLARIS64:
         case EX_DRAGONFLYBSD64:
+        case EX_ANONYMOS64:
             ELFOSABI = ELFOSABI_SYSV;
             break;
 

@@ -31,10 +31,11 @@ enum TargetOS : ubyte
     FreeBSD      = 0x10,
     Solaris      = 0x20,
     DragonFlyBSD = 0x40,
+    AnonymOS     = 0x80,
 
     // Combination masks
-    all = linux | Windows | OSX | OpenBSD | FreeBSD | Solaris | DragonFlyBSD,
-    Posix = linux | OSX | OpenBSD | FreeBSD | Solaris | DragonFlyBSD,
+    all = linux | Windows | OSX | OpenBSD | FreeBSD | Solaris | DragonFlyBSD | AnonymOS,
+    Posix = linux | OSX | OpenBSD | FreeBSD | Solaris | DragonFlyBSD | AnonymOS,
 }
 
 // Detect the current TargetOS
@@ -61,6 +62,10 @@ else version(FreeBSD)
 else version(DragonFlyBSD)
 {
     private enum targetOS = TargetOS.DragonFlyBSD;
+}
+else version(AnonymOS)
+{
+    private enum targetOS = TargetOS.AnonymOS;
 }
 else version(Solaris)
 {

@@ -2152,7 +2152,8 @@ void getClibFunction(uint clib, ref Symbol* s, ref ClibInfo* cinfo, objfmt_t obj
                           EX_FREEBSD | EX_FREEBSD64 |
                           EX_OPENBSD | EX_OPENBSD64 |
                           EX_DRAGONFLYBSD64 |
-                          EX_SOLARIS | EX_SOLARIS64);
+                          EX_SOLARIS | EX_SOLARIS64 |
+                          EX_ANONYMOS64);
 
     switch (clib)
     {
@@ -2174,7 +2175,7 @@ void getClibFunction(uint clib, ref Symbol* s, ref ClibInfo* cinfo, objfmt_t obj
 
         case CLIB.ldiv:
             cinfo.retregs16 = mDX|mAX;
-            if (exe & (EX_LINUX | EX_FREEBSD | EX_OPENBSD))
+            if (exe &  (EX_LINUX | EX_FREEBSD | EX_OPENBSD | EX_ANONYMOS64))
             {
                 s = symboly("__divdi3", mAX|mBX|mCX|mDX);
                 cinfo.flags = INFpushebx;
@@ -2202,7 +2203,7 @@ void getClibFunction(uint clib, ref Symbol* s, ref ClibInfo* cinfo, objfmt_t obj
 
         case CLIB.lmod:
             cinfo.retregs16 = mCX|mBX;
-            if (exe & (EX_LINUX | EX_FREEBSD | EX_OPENBSD))
+            if (exe &  (EX_LINUX | EX_FREEBSD | EX_OPENBSD | EX_ANONYMOS64))
             {
                 s = symboly("__moddi3", mAX|mBX|mCX|mDX);
                 cinfo.flags = INFpushebx;
@@ -2230,7 +2231,7 @@ void getClibFunction(uint clib, ref Symbol* s, ref ClibInfo* cinfo, objfmt_t obj
 
         case CLIB.uldiv:
             cinfo.retregs16 = mDX|mAX;
-            if (exe & (EX_LINUX | EX_FREEBSD | EX_OPENBSD))
+            if (exe &  (EX_LINUX | EX_FREEBSD | EX_OPENBSD | EX_ANONYMOS64))
             {
                 s = symboly("__udivdi3", mAX|mBX|mCX|mDX);
                 cinfo.flags = INFpushebx;
@@ -2258,7 +2259,7 @@ void getClibFunction(uint clib, ref Symbol* s, ref ClibInfo* cinfo, objfmt_t obj
 
         case CLIB.ulmod:
             cinfo.retregs16 = mCX|mBX;
-            if (exe & (EX_LINUX | EX_FREEBSD | EX_OPENBSD))
+            if (exe &  (EX_LINUX | EX_FREEBSD | EX_OPENBSD | EX_ANONYMOS64))
             {
                 s = symboly("__umoddi3", mAX|mBX|mCX|mDX);
                 cinfo.flags = INFpushebx;
@@ -2899,7 +2900,7 @@ void callclib(ref CodeBuilder cdb, elem* e, uint clib, ref regm_t pretregs, regm
         }
         if (pushebx)
         {
-            if (config.exe & (EX_LINUX | EX_LINUX64 | EX_FREEBSD | EX_FREEBSD64 | EX_OPENBSD | EX_OPENBSD64 | EX_DRAGONFLYBSD64))
+            if (config.exe & (EX_LINUX | EX_LINUX64 | EX_FREEBSD | EX_FREEBSD64 | EX_OPENBSD | EX_OPENBSD64 | EX_DRAGONFLYBSD64 | EX_ANONYMOS64))
             {
                 cdb.gen1(0x50 + CX);                             // PUSH ECX
                 cdb.gen1(0x50 + BX);                             // PUSH EBX
@@ -2920,7 +2921,7 @@ void callclib(ref CodeBuilder cdb, elem* e, uint clib, ref regm_t pretregs, regm
             cdb.gen1(0x50 + DX);                                 // PUSH EDX
             cdb.gen1(0x50 + AX);                                 // PUSH EAX
         }
-        if (config.exe & (EX_LINUX | EX_FREEBSD | EX_OPENBSD | EX_SOLARIS))
+        if (config.exe & (EX_LINUX | EX_FREEBSD | EX_OPENBSD | EX_SOLARIS | EX_ANONYMOS64))
         {
             // Note: not for OSX
             /* Pass EBX on the stack instead, this is because EBX is used
@@ -3383,7 +3384,7 @@ void cdfunc(ref CGstate cg, ref CodeBuilder cdb, elem* e, ref regm_t pretregs)
 
     /* Assume called function access statics
      */
-    if (config.exe & (EX_LINUX | EX_LINUX64 | EX_OSX | EX_FREEBSD | EX_FREEBSD64 | EX_OPENBSD | EX_OPENBSD64) &&
+    if (config.exe & (EX_LINUX | EX_LINUX64 | EX_OSX | EX_FREEBSD | EX_FREEBSD64 | EX_OPENBSD | EX_OPENBSD64 | EX_ANONYMOS64) &&
         config.flags3 & CFG3pic)
         cgstate.accessedTLS = true;
 
