@@ -23,6 +23,8 @@ else version (NetBSD)
     enum os = "netbsd";
 else version (DragonFlyBSD)
     enum os = "dragonflybsd";
+else version (AnonymOS)
+    enum os = "anonymos";
 else version (Solaris)
     enum os = "solaris";
 else version (SunOS)
