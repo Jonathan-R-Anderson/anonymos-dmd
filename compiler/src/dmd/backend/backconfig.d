@@ -153,7 +153,7 @@ void out_config_init(
             cfg.wflags |= WFexe;         // EXE file only optimizations
         cfg.flags4 |= CFG4underscore;
     }
-    if (cfg.exe & (EX_LINUX | EX_LINUX64))
+    if (cfg.exe & (EX_LINUX | EX_LINUX64 | EX_ANONYMOS64))
     {
         cfg.fpxmmregs = true;
         cfg.avx = avx;

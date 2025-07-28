@@ -39,7 +39,7 @@ enum TargetOS : ubyte
 }
 
 // Detect the current TargetOS
-version (linux)
+/*version (linux)
 {
     private enum targetOS = TargetOS.linux;
 }
@@ -63,18 +63,19 @@ else version(DragonFlyBSD)
 {
     private enum targetOS = TargetOS.DragonFlyBSD;
 }
-else version(AnonymOS)
-{
-    private enum targetOS = TargetOS.AnonymOS;
-}
 else version(Solaris)
 {
     private enum targetOS = TargetOS.Solaris;
 }
-else
+else version(PowerNex)
+{
+    private enum targetOS = TargetOS.PowerNex;
+}*/
+    private enum targetOS = TargetOS.AnonymOS;
+/*else
 {
     private enum targetOS = TargetOS.all;
-}
+}*/
 
 /**
 Checks whether `os` is the current $(LREF TargetOS).
