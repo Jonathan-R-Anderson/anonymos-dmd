@@ -300,13 +300,13 @@ extern (C++) struct Global
     const(char)[] inifilename; /// filename of configuration file as given by `-conf=`, or default value
 
     string copyright = "Copyright (C) 1999-2025 by The D Language Foundation, All Rights Reserved";
-    string written = "written by Walter Bright";
+    string written = "written by Walter Bright\nAnonymOS support by Jonathan R. Anderson";
 
     Array!(ImportPathInfo) path;       /// Array of path informations which form the import lookup path
     Array!(const(char)*) importPaths;  /// Array of char*'s which form the import lookup path without metadata
     Array!(const(char)*) filePath;     /// Array of char*'s which form the file import lookup path
 
-    private enum string _version = import("VERSION");
+    private enum string _version = import("VERSION") ~ "-AnonymOS";
     char[26] datetime;      /// string returned by ctime()
     CompileEnv compileEnv;
 
