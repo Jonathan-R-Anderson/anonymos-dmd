@@ -1680,7 +1680,7 @@ bool download(string to, string from, uint tries = 3)
 /**
 Detects the host OS.
 
-Returns: a string from `{windows, osx,linux,freebsd,openbsd,netbsd,dragonflybsd,solaris,anonymos}`
+Returns: a string from `{windows, osx,linux,freebsd,openbsd,netbsd,dragonflybsd,solaris,anonymos,powernex}`
 */
 string detectOS()
 {
@@ -1700,6 +1700,8 @@ string detectOS()
         return "dragonflybsd";
     else version(Solaris)
         return "solaris";
+    else version(PowerNex)
+        return "powernex";
     else version(AnonymOS)
         return "anonymos";
     else
