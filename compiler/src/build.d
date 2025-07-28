@@ -1684,7 +1684,7 @@ Returns: a string from `{windows, osx,linux,freebsd,openbsd,netbsd,dragonflybsd,
 */
 string detectOS()
 {
-    version(Windows)
+    /*version(Windows)
         return "windows";
     else version(OSX)
         return "osx";
@@ -1701,11 +1701,11 @@ string detectOS()
     else version(Solaris)
         return "solaris";
     else version(PowerNex)
-        return "powernex";
-    else version(AnonymOS)
+        return "powernex";*/
+    version(AnonymOS)
         return "anonymos";
-    else
-        static assert(0, "Unrecognized or unsupported OS.");
+    /*else
+        static assert(0, "Unrecognized or unsupported OS.");*/
 }
 
 /**
